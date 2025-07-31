@@ -1,7 +1,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo&display=swap" rel="stylesheet" />
     <div class="container" style="font-family:'Cairo'; padding: 20px; max-width: 1200px; margin: auto;direction: rtl;">
 
-        <h2 style="color: #2e7d32; margin-bottom: 20px;">قائمة المنتجات</h2>
+        <h2 style="color: #2e7d32; margin-bottom: 20px;text-align: center">قائمة المنتجات</h2>
 
         <a href="{{ route('admin.products.create') }}"
            style="display: inline-block; background-color: #2e7d32; color: white; padding: 10px 20px; border-radius: 8px; text-decoration: none; margin-bottom: 25px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">

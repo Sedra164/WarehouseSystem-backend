@@ -53,7 +53,18 @@
             border-radius: 6px;
             cursor: pointer;
         }
+        .btn-submit {
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-right: auto;
 
+        }
         a.back-link {
             display: inline-block;
             margin-top: 20px;
@@ -65,7 +76,7 @@
 <body>
 
 <div class="container">
-    <h2>إضافة موظف مستودع</h2>
+    <h2 >إضافة موظف مستودع</h2>
 
     <form action="{{ route('manager.warehouse_users.store') }}" method="POST">
         @csrf
@@ -89,7 +100,7 @@
 
         <input type="hidden" name="type" value="staff">
 
-        <button type="submit">حفظ الموظف</button>
+        <button type="submit" class="btn-submit">حفظ الموظف</button>
     </form>
     <a href="{{ route('manager.warehouse_users.index') }}" class="back-link">← الرجوع إلى القائمة</a>
 </div>

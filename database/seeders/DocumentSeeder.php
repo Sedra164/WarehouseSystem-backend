@@ -20,7 +20,7 @@ class DocumentSeeder extends Seeder
                 'date'                 => Carbon::now()->subDays(5),
                 'notes'                => 'شراء من المورد',
                 'warehouse_product_id' => 2,
-                'warehouse_user_id'    => 1,
+                'warehouse_user_id'    => 3,
                 'partner_id'           => 1
             ],
             [
@@ -28,7 +28,7 @@ class DocumentSeeder extends Seeder
                 'date'                 => Carbon::now()->subDays(2),
                 'notes'                => 'بيع للعميل',
                 'warehouse_product_id' => 1,
-                'warehouse_user_id'    => 2,
+                'warehouse_user_id'    => 4,
                 'partner_id'           => 2
             ],
             [
@@ -36,7 +36,7 @@ class DocumentSeeder extends Seeder
                 'date'                 => Carbon::now()->subDay(),
                 'notes'                => 'تلف مخزني',
                 'warehouse_product_id' => 3,
-                'warehouse_user_id'    => 2,
+                'warehouse_user_id'    => 3,
                 'partner_id'           => null
             ]
         ];

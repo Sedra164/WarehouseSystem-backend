@@ -46,17 +46,37 @@
         }
 
         .btn-back {
-            background-color: #2e7d32;
+            background-color: #a0a0a0;
             display: inline-block;
-            justify-content: center;
-            align-content: center;
             margin-top: 20px;
             text-decoration: none;
             color: #fff;
             font-weight: bold;
-            border: 1px solid #2e7d32;
+            border: 1px solid #a0a0a0;
             padding: 8px 16px;
             border-radius: 5px;
+        }
+
+        .btn-edit {
+            background-color: #2e7d32;
+            color: #fff;
+            padding: 6px 12px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin-left: 8px;
+        }
+
+        .btn-delete {
+            background-color: #c62828;
+            color: #fff;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .actions {
+            margin-top: 15px;
         }
 
     </style>
@@ -75,10 +95,15 @@
             <p><strong>الكمية:</strong> {{ $line->quantity }}</p>
             <p><strong>سعر الوحدة:</strong> {{ $line->unit_price }} ل.س</p>
             <p><strong>السعر الإجمالي:</strong> {{ $line->quantity * $line->unit_price }} ل.س</p>
+
+            <div class="actions">
+                <a href="{{ route('staff.documentLines.edit', $line->id) }}" class="btn-edit"> تعديل</a>
+
+            </div>
         </div>
     @endforeach
 
-    <a href="{{ route('manager.documents.managerDocument') }}" class="btn-back"> رجوع</a>
+    <a href="{{ route('staff.documents.index') }}" class="btn-back"> رجوع</a>
 </div>
 
 </body>

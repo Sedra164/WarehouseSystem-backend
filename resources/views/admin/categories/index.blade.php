@@ -93,7 +93,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>قائمة الأصناف</h1>
+    <h1 >قائمة الأصناف</h1>
 
     <a href="{{ route('admin.categories.create') }}" class="btn btn-add">➕ إضافة صنف جديد</a>
 

@@ -21,6 +21,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            height: 700px;
         }
         h1 {
             color: #2e7d32;
@@ -47,18 +48,15 @@
             resize: vertical;
             height: 100px;
         }
-        button {
-            background-color: #2e7d32;
+
+        .btn-submit {
+            background: #2e7d32;
             color: white;
-            padding: 12px 20px;
+            padding: 10px 20px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            width: 100%;
-        }
-        button:hover {
-            background-color: #27632a;
+            float: left;
         }
         .error {
             color: #c62828;
@@ -112,7 +110,11 @@
             @endforeach
         </select>
 
-        <button type="submit">إضافة المنتج</button>
+        <button type="submit" class="btn-submit">إضافة المنتج</button>
+
+        <a href="{{ route('admin.products.index') }}" style=" color: #25682a; padding: 10px 20px; border-radius: 5px; text-decoration: none; float: right; margin-top: 10px;">
+            ← رجوع إلى القائمة
+        </a>
     </form>
 </div>
 </body>

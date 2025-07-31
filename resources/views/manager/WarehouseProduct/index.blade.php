@@ -104,7 +104,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach ($warehouseProduct as $wp)
+        @forelse ($warehouseProduct as $wp)
             <tr class="{{ $wp->quantity < $wp->min_quantity ? 'low-stock' : '' }}">
                 <td>{{ $wp->product->name ?? 'غير متوفر' }}</td>
                 <td>{{ $wp->warehouse->name ?? 'غير متوفر' }}</td>
@@ -119,7 +119,11 @@
                     </form>
                 </td>
             </tr>
-        @endforeach
+            @empty
+                <tr>
+                    <td colspan="4" style="text-align:center;">لا توجد بيانات لعرضها</td>
+                </tr>
+        @endforelse
         </tbody>
     </table>
 </div>

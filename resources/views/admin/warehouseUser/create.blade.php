@@ -52,6 +52,7 @@
             margin-top: 20px;
             border-radius: 6px;
             cursor: pointer;
+            float: left;
         }
 
         a.back-link {

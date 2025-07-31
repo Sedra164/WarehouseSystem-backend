@@ -75,7 +75,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>إدارة مدراءالمخازن</h2>
+    <h2 style="text-align: center">إدارة مدراءالمخازن</h2>
     <a href="{{ route('manager.warehouse_users.create') }}" class="add-btn">➕ إضافة مدير جديد لمستودع</a>
     <table>
         <thead>

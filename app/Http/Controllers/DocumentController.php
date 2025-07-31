@@ -8,6 +8,8 @@ use App\Http\Requests\Document\UpdateDoumentRequest;
 use App\Http\Resources\DocumentResource;
 use App\Http\Resources\PartnerResource;
 use App\Models\Document;
+use App\Models\Partner;
+use App\Models\Warehouse;
 use App\Models\WarehouseProduct;
 use App\Models\WarehouseUser;
 use Illuminate\Http\Request;
@@ -21,11 +23,19 @@ class DocumentController extends Controller
     public function __construct()
     {
         $this->middleware(['auth', 'isManager'])->only('managerDocument');
+        $this->middleware(['auth','isStaff'])->except('managerDocument');
     }
     public function index()
     {
-        $document=Document::with(['warehouseUser.user', 'warehouseUser.warehouse', 'warehouseProduct.product','partner'])->get();
-        return ApiResponse::success(DocumentResource::collection($document),'This is All Documents',201);
+        $user = auth()->user();
+        $warehouseUser = $user->warehouseUser()->first();
+        if (!$warehouseUser) {
+            abort(403, 'أنت لا تملك صلاحية الوصول لأي مستودع.');
+        }
+        $document = Document::with(['warehouseUser.user', 'warehouseUser.warehouse', 'warehouseProduct.product', 'partner'])
+            ->where('warehouse_user_id', $warehouseUser->id)
+            ->get();
+        return view('staff.document.index', compact('document'));
     }
 
     /**
@@ -33,7 +43,14 @@ class DocumentController extends Controller
      */
     public function create()
     {
-        //
+       $userId            =auth()->id();
+        $warehouseUser    = WarehouseUser::with('warehouse','user')->where('user_id',$userId)->firstOrFail();
+        $warehouseUserId  =$warehouseUser->id;
+        $userName         =$warehouseUser->user->full_name;
+        $warehouseName    =$warehouseUser->warehouse->name;
+        $partner          = Partner::all();
+        $warehouseProduct = WarehouseProduct::with('product')->get();
+        return view('staff.document.create', compact('partner', 'warehouseUserId', 'warehouseProduct','userName','warehouseName'));
     }
 
     /**
@@ -51,7 +68,9 @@ class DocumentController extends Controller
             $document->partner_id = $request->partner_id;
         }
         $document->save();
-        return ApiResponse::success(DocumentResource::make($document),'Document Created Successfully!',201);
+       // return ApiResponse::success(DocumentResource::make($document),'Document Created Successfully!',201);
+        return redirect()->route('staff.documentLines.create', $document->id)
+            ->with('success', 'تمت إضافة الفاتورة. الرجاء إدخال تفاصيلها.');
     }
 
     /**
@@ -65,9 +84,13 @@ class DocumentController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( Document $document)
     {
-        //
+        $partner          = Partner::all();
+        $warehouseProduct = WarehouseProduct::with('product')->get();
+        $warehouseUser    = WarehouseUser::with(['user', 'warehouse'])->get();
+
+        return view('staff.document.edit', compact('document', 'partner', 'warehouseProduct', 'warehouseUser'));
     }
 
     /**
@@ -87,7 +110,8 @@ class DocumentController extends Controller
                 'partner_id'   =>$request->filled('partner_id')  ? $request->partner_id   :$document->partner_id
             ]);
         }
-        return ApiResponse::success(DocumentResource::make($document),'Documents Updated Successfully!',201);
+      //  return ApiResponse::success(DocumentResource::make($document),'Documents Updated Successfully!',201);
+        return redirect()->route('staff.documents.index')->with('success','تم تعديل الفاتورة بنجاح');
     }
 
     /**
@@ -96,19 +120,8 @@ class DocumentController extends Controller
     public function destroy(Document $document)
     {
         $document->delete();
-        return ApiResponse::success(null,'Document deleted successfully!',201);
-    }
-    public function managerDocument()
-    {
-        $userId = auth()->id();
-        $warehouseUserIds = WarehouseUser::where('user_id', $userId)->pluck('id');
-        $document = Document::with([
-            'warehouseUser.user',
-            'warehouseUser.warehouse',
-            'warehouseProduct.product',
-            'partner'
-        ])->whereIn('warehouse_user_id', $warehouseUserIds)->get();
-        return view('manager.document.managerDocument', compact('document'));
+//        return ApiResponse::success(null,'Document deleted successfully!',201);
+        return redirect()->route('staff.documents.index')->with(['success','تم حف الفاتورة بنجاح']);
     }
 
 }

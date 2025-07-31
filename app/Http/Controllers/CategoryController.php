@@ -43,7 +43,7 @@ class CategoryController extends Controller
         $categories->description=$request->input('description');
         $categories->save();
 //        return ApiResponse::success(CategoryResource::make($categories),'Category Created Successfully',201);
-        return redirect()->route('categories.index')->with('success', 'تمت إضافة الصنف بنجاح!');
+        return redirect()->route('admin.categories.index')->with('success', 'تمت إضافة الصنف بنجاح!');
     }
 
     /**
@@ -72,7 +72,7 @@ class CategoryController extends Controller
             'description' => $request->filled('description') ? $request->description : $categories->description,
         ]);
 //            return ApiResponse::success(CategoryResource::make($categories), 'Category Updated Successfully', 201);
-            return redirect()->route('categories.index')->with('success', 'تم تحديث الصنف بنجاح!');
+            return redirect()->route('admin.categories.index')->with('success', 'تم تحديث الصنف بنجاح!');
 
     }
 
@@ -83,6 +83,6 @@ class CategoryController extends Controller
     {
         $categories->delete();
 //        return ApiResponse::success(null,'Category Deleted Successfully',201);
-        return redirect()->route('categories.index')->with('success', 'تم الحذف بنجاح');
+        return redirect()->route('admin.categories.index')->with('success', 'تم الحذف بنجاح');
     }
 }

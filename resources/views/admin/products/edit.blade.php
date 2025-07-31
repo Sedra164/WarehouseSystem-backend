@@ -48,17 +48,13 @@
         }
 
         .btn-submit {
-            background-color: #2e7d32;
+            background: #2e7d32;
             color: white;
-            border: none;
             padding: 10px 20px;
-            font-size: 1rem;
-            border-radius: 6px;
+            border: none;
+            border-radius: 5px;
             cursor: pointer;
-        }
-
-        .btn-submit:hover {
-            background-color: #27632a;
+            float: left;
         }
 
         .error {

@@ -42,17 +42,14 @@
             box-sizing: border-box;
             font-size: 1rem;
         }
-        button {
-            background-color: #2e7d32;
+        .btn-submit {
+            background: #2e7d32;
             color: white;
             padding: 10px 20px;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-        }
-        button:hover {
-            background-color: #27632a;
+            float: left;
         }
         .back-link {
             display: inline-block;
@@ -67,7 +64,7 @@
 </head>
 <body>
 <div class="container">
-    <h1>إضافة صنف جديد</h1>
+    <h1 style="">إضافة صنف جديد</h1>
 
     <form action="{{ route('admin.categories.store') }}" method="POST">
         @csrf
@@ -78,7 +75,7 @@
         <label for="description">الوصف</label>
         <textarea id="description" name="description" rows="4"></textarea>
 
-        <button type="submit">حفظ</button>
+        <button type="submit" class="btn-submit">حفظ</button>
     </form>
 
     <a href="{{ route('admin.categories.index') }}" class="back-link">⟵ العودة إلى القائمة</a>

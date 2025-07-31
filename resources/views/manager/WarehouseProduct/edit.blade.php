@@ -13,6 +13,7 @@
 
         .container {
             background: #f0f0f0;
+            height: 400px;
             padding: 25px;
             border-radius: 8px;
             max-width: 600px;
@@ -87,6 +88,10 @@
         <input type="number" name="min_quantity" value="{{ $warehouseProduct->min_quantity }}" required>
 
         <button type="submit" class="btn-submit">💾 تحديث</button>
+
+        <a href="{{ route('manager.WarehouseProducts.index') }}" style=" color: #25682a; padding: 10px 20px; border-radius: 5px; text-decoration: none; float: right; margin-top: 10px;">
+            ← رجوع إلى القائمة
+        </a>
     </form>
 </div>
 

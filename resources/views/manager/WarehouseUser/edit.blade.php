@@ -55,6 +55,18 @@
             border-radius: 6px;
             cursor: pointer;
         }
+        .btn-submit {
+            background-color: #2e7d32;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: block;
+            margin-right: auto;
+
+        }
 
         a.back-link {
             display: inline-block;
@@ -80,7 +92,7 @@
         <label for="password">كلمة المرور</label>
         <input type="password" id="password" name="password">
 
-        <button type="submit">💾 حفظ التعديلات</button>
+        <button type="submit" class="btn-submit">💾 حفظ التعديلات</button>
     </form>
     @if ($errors->any())
         <div style="color: red;">

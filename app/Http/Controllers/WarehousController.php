@@ -45,7 +45,7 @@ class WarehousController extends Controller
         $warehouse->location   =$request->input('location');
         $warehouse->save();
 //        return ApiResponse::success(WarehouseResource::make($warehouse),'Warehouse Created Successfully',201);
-        return redirect()->route('warehouses.store')->with('success','!تم إضافة المستودع بنجاح');
+        return redirect()->route('admin.warehouses.index')->with('success','!تم إضافة المستودع بنجاح');
     }
 
     /**
@@ -75,7 +75,7 @@ class WarehousController extends Controller
             'description' => $request->filled('description') ? $request->description : $warehouse->description,
         ]);
 //        return ApiResponse::success(WarehouseResource::make($warehouse),'Warehouse Update Successfully',201);
-        return redirect()->route('warehouses.index')->with('success','تم التعديل بنجاح!');
+        return redirect()->route('admin.warehouses.index')->with('success','تم التعديل بنجاح!');
     }
 
     /**
@@ -85,6 +85,6 @@ class WarehousController extends Controller
     {
         $warehouse->delete();
 //        return ApiResponse::success(null,'Warehouse Deleted Successfully',201);
-        return redirect()->route('warehouses.index')->with('success','تم حذف المستودع بنجاح!');
+        return redirect()->route('admin.warehouses.index')->with('success','تم حذف المستودع بنجاح!');
     }
 }

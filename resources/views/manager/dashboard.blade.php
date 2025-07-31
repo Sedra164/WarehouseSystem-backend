@@ -121,9 +121,9 @@
 <div class="sidebar">
     <ul>
         <li><a href="{{route('manager.partners.index')}}">العملاء</a></li>
-        <li><a href="{{route('manager.WarehouseProducts.index')}}">المنتجات داخل المستودع</a></li>
-        <li><a href="{{route('manager.warehouse_users.index')}}">موظفين المستودع</a></li>
-        <li><a href="{{route('manager.documents.managerDocument')}}">الفواتير</a></li>
+        <li><a href="{{route('manager.WarehouseProducts.index')}}">المنتجات داخل المخزن</a></li>
+        <li><a href="{{route('manager.warehouse_users.index')}}">موظفين المخزن</a></li>
+        <li><a href="{{route('manager.export.documents')}}"> تحميل الفواتير </a></li>
     </ul>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf

@@ -21,4 +21,11 @@ class Document extends Model
     public function warehouseProduct(){
         return $this->belongsTo(WarehouseProduct::class);
     }
+    protected static function boot()
+    {
+        parent::boot();
+        static::deleting(function ($document){
+        $document->documentLine()->delete();
+        });
+    }
 }

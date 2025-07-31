@@ -30,7 +30,7 @@ class LoginController extends Controller
                 case 'manager':
                     return redirect()->route('manager.dashboard');
                 case 'staff':
-                    return redirect()->route('staff.dashboard');
+                    return redirect()->route('staff.documents.index');
                 default:
                     Auth::logout();
                     return redirect()->route('login')->withErrors(['email' => 'دور غير معروف.']);

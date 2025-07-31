@@ -130,7 +130,8 @@
         <li><a href="{{route('admin.categories.index')}}"> الاصناف</a></li>
         <li><a href="{{route('admin.units.index')}}"> الواحدات </a></li>
         <li><a href="{{route('admin.warehouses.index')}}"> المخازن </a></li>
-        <li><a href="{{route('admin.warehouseUsers.index')}}"> إضافة مدير للمخزن </a></li>
+        <li><a href="{{route('admin.warehouseUsers.index')}}"> مدراء المخازن </a></li>
+        <li><a href="{{route('admin.export.documents')}}"> تحميل الفواتير </a></li>
     </ul>
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf

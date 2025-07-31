@@ -13,11 +13,13 @@
 
         .container {
             background: #f0f0f0;
+            height: 500px;
             padding:25px;
             border-radius: 8px;
             max-width: 600px;
             margin: auto;
             box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+
         }
 
         h2 {
@@ -92,7 +94,9 @@
         <input type="number" name="min_quantity" required>
 
         <button type="submit" class="btn-submit">💾 حفظ</button>
-{{--        <a href="{{ route('manager.WarehouseProducts.index') }}" class="btn-back">🔙 رجوع</a>--}}
+        <a href="{{ route('manager.WarehouseProducts.index') }}" style=" color: #25682a; padding: 10px 20px; border-radius: 5px; text-decoration: none; float: right; margin-top: 10px;">
+            ← رجوع إلى القائمة
+        </a>
     </form>
 </div>
 

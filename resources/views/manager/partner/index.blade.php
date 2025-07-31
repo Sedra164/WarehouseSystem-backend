@@ -55,9 +55,9 @@
 
 <div class="main-box">
     <div class="title-box">
-        <h2 class="text-center w-100">قائمة الشركاء</h2>
+        <h2 class="text-center w-100">قائمة العملاء</h2>
         <div class="d-flex justify-content-end">
-            <a href="{{ route('manager.partners.create') }}" class="btn btn-add">➕ إضافة شريك</a>
+            <a href="{{ route('manager.partners.create') }}" class="btn btn-add">➕ إضافة عميل</a>
         </div>
     </div>
 

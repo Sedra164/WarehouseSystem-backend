@@ -24,7 +24,6 @@ class UpdateDocumentLinesRequest extends FormRequest
         return [
             'quantity'      => 'sometimes|integer|min:1',
             'unit_price'   => 'sometimes|numeric|min:0',
-            'document_id'   => 'sometimes|exists:documents,id',
         ];
     }
 }

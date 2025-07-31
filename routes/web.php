@@ -1,6 +1,7 @@
 <?php
-
-use Illuminate\Support\Facades\Route;
+use App\Exports\DocumentsWithLinesExport;
+use App\Exports\DocumentsWithLinesForAdminExport;
+use Maatwebsite\Excel\Facades\Excel;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Manager\MDashboardController;
@@ -13,6 +14,7 @@ use App\Http\Controllers\PartnerController;
 use App\Http\Controllers\WarehousProductController;
 use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\DocumentLinesController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -90,6 +92,10 @@ Route::prefix('admin')->name('admin.') ->middleware(['auth', 'isAdmin'])->group(
     Route::get('/warehouseUsers/{id}', [WarehousUserController::class, 'edit'])->name('warehouseUsers.edit');
     Route::put('/warehouseUsers/{id}', [WarehousUserController::class, 'update'])->name('warehouseUsers.update');
     Route::delete('/warehouseUsers/{id}', [WarehousUserController::class, 'destroy'])->name('warehouseUsers.delete');
+
+    Route::get('/export-documents', function () {
+        return Excel::download(new DocumentsWithLinesForAdminExport(), 'فواتير المخزن.xlsx');
+    })->name('export.documents');
 });
 
 
@@ -121,10 +127,25 @@ Route::prefix('manager')->name('manager.')->middleware(['auth', 'isManager'])->g
     Route::put('/warehouse_users/{id}', [WarehousUserController::class, 'update'])->name('warehouse_users.update');
     Route::delete('/warehouse_users/{id}', [WarehousUserController::class, 'destroy'])->name('warehouse_users.delete');
 
+    Route::get('/export-documents', function () {
+        return Excel::download(new DocumentsWithLinesExport(auth()->id()), 'فواتير المخزن.xlsx');
+    })->name('export.documents');
+});
 
 
+Route::prefix('staff')->name('staff.')->middleware(['auth', 'isStaff'])->group(function(){
+    Route::get('/documents',[DocumentController::class,'index'])->name('documents.index');
+    Route::get('/documents/create',[DocumentController::class,'create'])->name('documents.create');
+    Route::post('/documents',[DocumentController::class,'store'])->name('documents.store');
+    Route::get('/documents/{document}',[DocumentController::class,'edit'])->name('documents.edit');
+    Route::put('/documents/{document}',[DocumentController::class,'update'])->name('documents.update');
+    Route::delete('/documents/{document}',[DocumentController::class,'destroy'])->name('documents.delete');
 
-    Route::get('/documents',[DocumentController::class,'managerDocument'])->name('documents.managerDocument');
-    Route::get('/documentLines/{id}',[DocumentLinesController::class,'managerDocumentLines'])->name('documentLines.managerDocumentLine');
+
+    Route::get('/documentLines/{id}',[DocumentLinesController::class,'index'])->name('documentLines.index');
+    Route::get('/documentLines/create/{document}',[DocumentLinesController::class,'create'])->name('documentLines.create');
+    Route::post('/documentLines',[DocumentLinesController::class,'store'])->name('documentLines.store');
+    Route::get('/documentLines/edit/{documentLine}',[DocumentLinesController::class,'edit'])->name('documentLines.edit');
+    Route::put('/documentLines/{documentLine}',[DocumentLinesController::class,'update'])->name('documentLines.update');
 
 });

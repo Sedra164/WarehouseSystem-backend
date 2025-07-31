@@ -6,7 +6,9 @@ use App\Helpers\ApiResponse;
 use App\Http\Requests\DocumentLines\StoreDocumentLinesRequest;
 use App\Http\Requests\DocumentLines\UpdateDocumentLinesRequest;
 use App\Http\Resources\DocumentLinesResource;
+use App\Models\Document;
 use App\Models\DocumentLines;
+use App\Models\Product;
 use Illuminate\Http\Request;
 
 class DocumentLinesController extends Controller
@@ -14,18 +16,20 @@ class DocumentLinesController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index($id)
     {
-        $documentline=DocumentLines::with(['document'])->get();
-        return ApiResponse::success(DocumentLinesResource::collection($documentline),'This is All DocumentLines ',201);
+        $documentline=DocumentLines::with(['document'])->where('document_id', $id)->get();
+      //  return ApiResponse::success(DocumentLinesResource::collection($documentline),'This is All DocumentLines ',201);
+        return view('staff.documentLine.index',compact('documentline'));
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Document $document)
     {
-        //
+        $product  = $document->warehouseProduct->product->name ?? 'اسم غير معروف';
+        return view('staff.documentLine.create', compact('document', 'product'));
     }
 
     /**
@@ -35,11 +39,13 @@ class DocumentLinesController extends Controller
     {
         $documentLine             =new DocumentLines();
         $documentLine->quantity   =$request->input('quantity');
-        $documentLine->unit_price =$request->input('unitPrice');
-        $documentLine->total_price=$request->input('totalPrice');
+        $documentLine->unit_price =$request->input('unit_price');
+        $documentLine->total_price=$request->input('total_price');
         $documentLine->document()->associate($request->document_id);
         $documentLine->save();
-        return ApiResponse::success(DocumentLinesResource::make($documentLine),'DocumentLines Created Successfully!',201);
+      //  return ApiResponse::success(DocumentLinesResource::make($documentLine),'DocumentLines Created Successfully!',201);
+        return redirect()->route('staff.documents.index', $request->document_id)
+            ->with('success', 'تمت إضافة سطر جديد. يمكنك إدخال المزيد من التفاصيل.');
     }
 
     /**
@@ -53,9 +59,9 @@ class DocumentLinesController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit( DocumentLines $documentLine)
     {
-        //
+        return view('staff.documentLine.edit',compact('documentLine'));
     }
 
     /**
@@ -67,22 +73,18 @@ class DocumentLinesController extends Controller
                 'quantity'        => $request->filled('quantity')     ? $request->quantity    : $documentLine->quantity,
                 'total_price'     => $request->filled('total_price')  ? $request->total_price : $documentLine->total_price,
                 'unit_price'      => $request->filled('unit_price')   ? $request->unit_price  : $documentLine->unit_price,
-                'document_id'     => $request->filled('document_id')  ? $request->document_id : $documentLine->document_id,
+
         ]);
-        return ApiResponse::success(DocumentLinesResource::make($documentLine),'DocumentLines Updated Successfully!',201);
+       // return ApiResponse::success(DocumentLinesResource::make($documentLine),'DocumentLines Updated Successfully!',201);
+        return redirect()->route('staff.documents.index')->with('success','تم تعديل تفاصيل الفاتورة بنجاح');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(DocumentLines $documentLine)
+    public function destroy()
     {
-        $documentLine->delete();
-        return ApiResponse::success(null,'DocumentLine Deleted Successfully!',201);
+        //
     }
-    public function managerDocumentLines($id)
-    {
-        $documentline = DocumentLines::with(['document'])->where('document_id', $id)->get();
-        return view('manager.documentLine.managerDocumentLine', compact('documentline'));
-    }
+
 }

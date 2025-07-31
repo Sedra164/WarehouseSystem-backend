@@ -43,7 +43,7 @@ class UnitController extends Controller
         $unit->abbreviation=$request->input('abbreviation');
         $unit->save();
 //        return ApiResponse::success(UnitResource::make($unit),'Unit Created Successfully',201);
-        return redirect()->route('units.index')->with('success', 'تمت إضافة الوحدة بنجاح');
+        return redirect()->route('admin.units.index')->with('success', 'تمت إضافة الوحدة بنجاح');
     }
 
     /**
@@ -73,7 +73,7 @@ class UnitController extends Controller
 
        ]);
 //            return ApiResponse::success(UnitResource::make($unit),'Unit Updated successfully',201);
-        return redirect()->route('units.index')->with('success', 'تم تحديث الواحدة بنجاح!');
+        return redirect()->route('admin.units.index')->with('success', 'تم تحديث الواحدة بنجاح!');
     }
 
     /**
@@ -83,6 +83,6 @@ class UnitController extends Controller
     {
         $unit->delete();
 //        return ApiResponse::success(null,'Unit Deleted Successfully',201);
-        return redirect()->route('units.index')->with('success', 'تم الحذف بنجاح');
+        return redirect()->route('admin.units.index')->with('success', 'تم الحذف بنجاح');
     }
 }

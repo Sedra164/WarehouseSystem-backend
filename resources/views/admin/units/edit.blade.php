@@ -53,6 +53,7 @@
             font-size: 1rem;
             border-radius: 6px;
             cursor: pointer;
+            float: left;
         }
 
         .btn-submit:hover {

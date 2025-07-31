@@ -19,6 +19,7 @@
             padding: 30px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            height: 500px;
         }
 
         h2 {
@@ -86,6 +87,10 @@
         <textarea name="address" id="address" rows="3"></textarea>
 
         <button type="submit" class="btn-submit">💾 حفظ</button>
+
+        <a href="{{ route('manager.partners.index') }}" style=" color: #25682a; padding: 10px 20px; border-radius: 5px; text-decoration: none; float: right; margin-top: 10px;">
+            ← رجوع إلى القائمة
+        </a>
     </form>
 </div>
 </body>

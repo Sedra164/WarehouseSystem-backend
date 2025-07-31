@@ -51,7 +51,7 @@ class ProductController extends Controller
         $product->category()->associate($request->category_id);
         $product->save();
 //        return ApiResponse::success(ProductResource::make($product),'Product Created Successfully',201);
-        return redirect()->route('products.index')->with('success', 'تم إضافة المنتج بنجاح');
+        return redirect()->route('admin.products.index')->with('success', 'تم إضافة المنتج بنجاح');
     }
 
     /**
@@ -85,7 +85,7 @@ class ProductController extends Controller
           'category_id' => $request->filled('category_id') ? $request->category_id : $product->category_id,
       ]);
       //return ApiResponse::success(ProductResource::make($product),'Product Updated Successfully!',201);
-      return redirect()->route('products.index')->with('success','تم تحديث المنتج بنجاح!');
+      return redirect()->route('admin.products.index')->with('success','تم تحديث المنتج بنجاح!');
     }
 
     /**
@@ -94,7 +94,7 @@ class ProductController extends Controller
     public function destroy(Product $product)
     {
         $product->delete();
-        return redirect()->route('products.index')->with('success', 'تم الحذف بنجاح');
+        return redirect()->route('admin.products.index')->with('success', 'تم الحذف بنجاح');
 //        return ApiResponse::success(null,'Product Deleted Successfully',201);
     }
 }
