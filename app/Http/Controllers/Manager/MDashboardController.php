@@ -18,7 +18,7 @@ class MDashboardController extends Controller
         $partnersCount = Partner::count();
         $warehouseProductsCount = WarehouseProduct::count();
         $documentsCount = Document::count();
-        $usersCount = WarehouseUser::count();
+
 
         $partnersStats = Partner::selectRaw('type, COUNT(*) as total')->groupBy('type')->get()
             ->pluck('total','type')->toArray();
@@ -43,7 +43,7 @@ class MDashboardController extends Controller
         $productQuantities = $topProducts->pluck('total_quantity');
 
         return view('manager.dashboard', compact(
-            'partnersCount','warehouseProductsCount','documentsCount','usersCount',
+            'partnersCount','warehouseProductsCount','documentsCount',
             'partnersStats','docsStats','monthlyStats','productNames','productQuantities'
         ));
     }

@@ -67,7 +67,7 @@ Route::prefix('admin')->name('admin.') ->middleware(['auth', 'isAdmin'])->group(
     Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
     Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('categories.update');
     Route::get('/categories/{category}', [CategoryController::class, 'edit'])->name('categories.edit');
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.delete');
+    Route::delete('/categories/{categories}', [CategoryController::class, 'destroy'])->name('categories.delete');
 
 
     Route::get('/units', [UnitController::class, 'index'])->name('units.index');

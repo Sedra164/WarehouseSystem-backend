@@ -138,8 +138,7 @@
     <div class="cards">
         <div class="card"><h2>{{ $partnersCount }}</h2><p>عدد العملاء</p></div>
         <div class="card"><h2>{{ $warehouseProductsCount }}</h2><p>عدد المنتجات</p></div>
-        <div class="card"><h2>{{ $documentsCount }}</h2><p>عدد الوثائق</p></div>
-        <div class="card"><h2>{{ $usersCount }}</h2><p>عدد الموظفين</p></div>
+        <div class="card"><h2>{{ $documentsCount }}</h2><p>عدد الفواتير</p></div>
     </div>
     <div class="charts">
         <div style="display: flex; gap: 30px; flex-wrap: wrap; width: 100%;">
